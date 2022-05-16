@@ -122,19 +122,29 @@
 // text2Elements.innerText = 'march-2022'
 
 
-let array = [1, 2, [3, 45, 67], 8, [9, 1011, [12, 13, 14, [15, 16, 1718]]]];
+
+
+//additional
+
+let array = [1, 2, [3, 45, 67], 8, [9, 1011, [12, 13, 14, [15, 16, 1718]]], 19];
 
 // debugger
-function foo(arr) {
+function foo(...arr) {
     let newArr = [];
-    for (let item of arr) {
-        if (item.length === undefined) {
-            console.log(item);
-            newArr.push(item)
+    while (arr.length) {
+        // console.log(typeof arr.length);
+        let next = arr.pop()
+        // console.log(next);
+        if (Array.isArray(next)) {
+            arr.push(...next)
+            // console.log(arr);
         } else {
-            foo(item)
+            newArr.push(next)
+            // console.log(newArr);
         }
     }
-    return newArr
+    return newArr.reverse()
 }
+
 console.log(foo(array));
+
